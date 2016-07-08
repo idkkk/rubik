@@ -14,10 +14,10 @@ Rubik is a rapid Java develop framework.
 ### Frontend
 1. react, falcor, webpack
 2. redux
-3. jQuery
+3. jQuery, jQuery UI
 
 ### Backend
-1. Spring boot
+1. Spring Boot
 2. Spring Security / Shiro
 3. Spring JPA
 4. Spring Cache
