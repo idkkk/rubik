@@ -6,6 +6,10 @@
 2. react
 3. redux
 
+## install locally
+
+npm install
+
 ## How to use
 
 1. run server
