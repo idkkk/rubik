@@ -1,0 +1,31 @@
+{
+  "name": "rubik-frontend",
+  "version": "0.0.1",
+  "description": "the frontend of rubik",
+  "main": "entry.js",
+  "scripts": {
+    "build": "webpack ./app/entry.js ./build/bundle.js",
+    "start": "webpack-dev-server --progress --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idkkk/rubik.git"
+  },
+  "keywords": [
+    "rubik-frontend"
+  ],
+  "author": "zhangbaitong@163.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/idkkk/rubik/issues"
+  },
+  "homepage": "https://github.com/idkkk/rubik#readme",
+  "dependencies": {
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  },
+  "devDependencies": {
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  }
+}
