@@ -12,13 +12,10 @@ npm install
 
 ## How to use
 
-1. run server
-
-npm start
-
-2. build depoly files
-
-npm build
+1.run server
+	npm start
+2.build depoly files
+	npm build
 
 ## access
 
