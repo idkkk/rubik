@@ -30,7 +30,7 @@ public class UserController extends BaseController {
         return ResponseEntity.ok().body(userService.allUsers());
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> findUserById(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(userService.findUserById(id));
     }
@@ -44,7 +44,7 @@ public class UserController extends BaseController {
         return ResponseEntity.ok().body(response);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<BaseResponse> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         BaseResponse response = new BaseResponse();
@@ -55,7 +55,7 @@ public class UserController extends BaseController {
 
 
     // ============================================= async =============================================
-    @RequestMapping("/async/Users")
+    @RequestMapping("/async/users")
     public ResponseEntity<Single<List<User>>> asyncUsers() {
         return ResponseEntity.ok().body(userService.asyncAllUsers().toSingle());
     }
