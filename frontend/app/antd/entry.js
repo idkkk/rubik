@@ -4,6 +4,8 @@ document.write('<div id = "App"></div>');
 // css style
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 
+require("./theme/template/BrowserDemo.css");
+
 // basic js
 //document.write(require("./content.js"));
 

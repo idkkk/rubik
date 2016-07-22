@@ -21,6 +21,7 @@ let Demo = React.createClass({
     e.preventDefault();
     console.log('收到表单值：', this.props.form.getFieldsValue());
     console.log('password: ',this.props.form.getFieldsValue().password)
+    console.log('userName: ',this.props.form.getFieldsValue().userName)
     // login
     if (this.props.form.getFieldsValue().password !== 'admin') {
       console.log('login faild');
@@ -28,6 +29,7 @@ let Demo = React.createClass({
     }
     console.log('login true');
     localStorage.setItem('login', 'true');
+    localStorage.setItem('userName', this.props.form.getFieldsValue().userName);
     console.log('login state: ',localStorage.getItem('login'));
     const path = `/home`
     console.log('path',path)
@@ -37,16 +39,23 @@ let Demo = React.createClass({
   render() {
     console.log('has login ?',hasLogin());
     if(hasLogin()){
-      return <p>你已经登录系统！<Link to="/logout">点此退出</Link></p>;
+          const path = `/home`
+          console.log('path',path)
+          this.context.router.push(path)
+          //return <p>你已经登录系统！<Link to="/logout">点此退出</Link></p>;
     }
     const { getFieldProps } = this.props.form;
     return (
+          <div className='antd-login-backgroud'>
+          <div className='antd-login'>
           <Form inline onSubmit={this.handleSubmit}>
               <FormItem label="账户"><Input placeholder="请输入账户名" {...getFieldProps('userName')}/></FormItem>
               <FormItem label="密码"><Input type="password" placeholder="请输入密码" {...getFieldProps('password')}/></FormItem>
               <FormItem><Checkbox {...getFieldProps('agreement')}>记住我</Checkbox></FormItem>
               <Button type="primary" htmlType="submit">登录</Button>
           </Form>
+          </div>
+          </div>
     );
   },
 });

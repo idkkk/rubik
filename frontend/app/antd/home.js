@@ -1,9 +1,13 @@
 import React from 'react'
+import { browserHistory, Link } from 'react-router'
 import { Menu, Breadcrumb, Icon } from 'antd';
 
-require("./theme/template/BrowserDemo.css");
-
 const SubMenu = Menu.SubMenu;
+
+function hasLogin(){
+   console.log('log state now :',localStorage.getItem('login'));
+   return localStorage.getItem('login') == 'true';
+}
 
 export default React.createClass({
   getInitialState() {
@@ -18,15 +22,23 @@ export default React.createClass({
   },
   render() {
   	const collapse = this.state.collapse;
+  	const haslogin = localStorage.getItem('login');
+    const userName = localStorage.getItem('userName');
+  	console.log(haslogin);
+  	console.log(userName);
+	if(!hasLogin()){
+      browserHistory.push('/')
+      //return <p>你已经登录系统！<Link to="/logout">点此退出</Link></p>;
+    }
     return (<div className="ant-layout-ceiling-demo">
       <div className="ant-layout-ceiling">
         <div className="ant-layout-wrapper">
           <ul className="right">
-            <li>xxx@example.com</li>
+            <li>Hi : {userName}</li>
             <li>|</li>
-            <li>帮助中心</li>
+			<li><Link to="/logout">退出</Link></li>            
             <li>|</li>
-            <li>客服/投诉电话：400-826-7710</li>
+            <li><a href='https://github.com/idkkk/rubik'>rubik</a></li>
           </ul>
         </div>
       </div>
@@ -71,7 +83,7 @@ export default React.createClass({
           </div>
         </div>
         <div className="ant-layout-footer">
-        Ant Design 版权所有 © 2015 由蚂蚁金服体验技术部支持
+        rubik © 2016
         </div>
       </div>
     </div>

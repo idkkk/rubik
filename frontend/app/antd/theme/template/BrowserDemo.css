@@ -1,3 +1,27 @@
+/* login layout */
+
+.antd-login{
+  width:200px;
+  height:200px;
+  margin:auto;
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0; 
+}
+
+.antd-login-backgroud{
+   height: 100%;
+   background-image:url(login.jpg);
+   background-position:center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size:cover;opacity:0.9;
+}
+
+/* home top menu layout */
+
 .ant-layout-ceiling-demo {
   height: 100%;
 }
@@ -37,15 +61,7 @@
   margin: 16px 28px 16px 0;
 }
 
-
-
-
-
-
-
-
-
-
+/* home page layout */
 
 .ant-layout-aside {
   position: relative;
