@@ -1,13 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 
+import { Link } from 'react-router'
+
 // import antd
 import { Form, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
-import { Row, Col } from 'antd';
-
 // import rubik
 
+function hasLogin(){
+   console.log('log state now :',localStorage.getItem('login'));
+   return localStorage.getItem('login') == 'true';
+}
 
 let Demo = React.createClass({
   contextTypes: {
@@ -31,6 +35,10 @@ let Demo = React.createClass({
   },
 
   render() {
+    console.log('has login ?',hasLogin());
+    if(hasLogin()){
+      return <p>你已经登录系统！<Link to="/logout">点此退出</Link></p>;
+    }
     const { getFieldProps } = this.props.form;
     return (
           <Form inline onSubmit={this.handleSubmit}>
@@ -42,6 +50,7 @@ let Demo = React.createClass({
     );
   },
 });
+
 
 Demo = Form.create()(Demo);
 

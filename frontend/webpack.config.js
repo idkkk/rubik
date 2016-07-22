@@ -2,7 +2,7 @@ module.exports = {
     entry: "./app/antd/entry.js",
     output: {
         path: "./build/",
-        filename: "bundle.js"
+        filename: 'bundle.js'
     },
     devServer: {
       inline: true,
