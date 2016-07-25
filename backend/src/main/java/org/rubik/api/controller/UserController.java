@@ -39,8 +39,8 @@ public class UserController extends BaseController {
     public ResponseEntity<BaseResponse> saveUser(@Valid User user) {
         userService.saveUser(user);
         BaseResponse response = new BaseResponse();
-        response.setResultCode("0000");
-        response.setResultMsg("OK");
+        response.setCode("0000");
+        response.setMessage("OK");
         return ResponseEntity.ok().body(response);
     }
 
@@ -48,8 +48,8 @@ public class UserController extends BaseController {
     public ResponseEntity<BaseResponse> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         BaseResponse response = new BaseResponse();
-        response.setResultCode("0000");
-        response.setResultMsg("OK");
+        response.setCode("0000");
+        response.setMessage("OK");
         return ResponseEntity.ok().body(response);
     }
 

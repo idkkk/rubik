@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     protected static final Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 
+    protected static final String DEFAULT_PAGE = "0";
+
+    protected static final String DEFAULT_SIZE = "2";
+
     // ================================================= System Exception =================================================
     //TODO: 异常代码表
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseResponse> handleExcetpion(Exception ex) {
         LOGGER.error("Exception info: {}", Throwables.getStackTraceAsString(ex));
         BaseResponse response = new BaseResponse();
-        response.setResultCode("1100");
-        response.setResultMsg("系统内部错误");
+        response.setCode("9000");
+        response.setMessage("系统内部错误");
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 }

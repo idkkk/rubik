@@ -11,27 +11,27 @@ public class BaseResponse {
     /**
      * 响应代码.
      */
-    private String resultCode;
+    private String code;
 
     /**
      * 响应消息.
      */
-    private String resultMsg;
+    private String message;
 
-    public String getResultMsg() {
-        return resultMsg;
+    public String getCode() {
+        return code;
     }
 
-    public void setResultMsg(String resultMsg) {
-        this.resultMsg = resultMsg;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getResultCode() {
-        return resultCode;
+    public String getMessage() {
+        return message;
     }
 
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -41,16 +41,16 @@ public class BaseResponse {
 
         BaseResponse that = (BaseResponse) o;
 
-        if (getResultCode() != null ? !getResultCode().equals(that.getResultCode()) : that.getResultCode() != null)
+        if (getCode() != null ? !getCode().equals(that.getCode()) : that.getCode() != null)
             return false;
-        return getResultMsg() != null ? getResultMsg().equals(that.getResultMsg()) : that.getResultMsg() == null;
+        return getMessage() != null ? getMessage().equals(that.getMessage()) : that.getMessage() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getResultCode() != null ? getResultCode().hashCode() : 0;
-        result = 31 * result + (getResultMsg() != null ? getResultMsg().hashCode() : 0);
+        int result = getCode() != null ? getCode().hashCode() : 0;
+        result = 31 * result + (getMessage() != null ? getMessage().hashCode() : 0);
         return result;
     }
 }
