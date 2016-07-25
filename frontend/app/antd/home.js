@@ -1,6 +1,12 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { browserHistory, Link } from 'react-router'
-import { Menu, Breadcrumb, Icon } from 'antd';
+import { Menu, Breadcrumb, Table, Icon } from 'antd';
+
+
+import Info from './components/info';
+import Edit from './components/edit';
+import {listcolumns,listdata} from './components/list';
 
 const SubMenu = Menu.SubMenu;
 
@@ -10,6 +16,22 @@ function hasLogin(){
 }
 
 export default React.createClass({
+  onSelectTest(item){
+        console.log('select evnet >>>>>');
+        console.log(item.key);
+        console.log(item.key == '1');
+        switch(item.key)
+        {
+        case '1':
+          ReactDOM.render(<Edit />,document.getElementById('detail'))
+          break;
+        case '2':
+          ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+          break;
+        default:
+          ReactDOM.render(<Info />,document.getElementById('detail'))
+        }
+  },
   getInitialState() {
     return {
       collapse: true,
@@ -45,7 +67,7 @@ export default React.createClass({
       <div className="ant-layout-aside">
       <aside className="ant-layout-sider">
         <div className="ant-layout-logo"></div>
-        <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
+        <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}  onSelect={this.onSelectTest}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
             <Menu.Item key="1">选项1</Menu.Item>
             <Menu.Item key="2">选项2</Menu.Item>
@@ -77,7 +99,7 @@ export default React.createClass({
         </div>
         <div className="ant-layout-container">
           <div className="ant-layout-content">
-            <div style={{ height: 390 }}>
+            <div style={{ height: 390 }} id='detail'>
               内容区域
             </div>
           </div>
