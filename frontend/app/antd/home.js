@@ -49,7 +49,7 @@ export default React.createClass({
                           </Provider>,
                           document.getElementById('detail'))
           break;
-        case '5':
+        case '4':
           ReactDOM.render(<ProductList />,document.getElementById('detail'))
           break;
         default:
@@ -90,16 +90,15 @@ export default React.createClass({
       </div>
       <div className="ant-layout-aside">
       <aside className="ant-layout-sider">
-        <div className="ant-layout-logo"></div>
         <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}  onSelect={this.onSelectTest}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
             <Menu.Item key="1">编辑页</Menu.Item>
             <Menu.Item key="2">列表页</Menu.Item>
             <Menu.Item key="3">TODO应用</Menu.Item>
-            <Menu.Item key="4">选项4</Menu.Item>
+            <Menu.Item key="4">CRUD</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="laptop" />导航二</span>}>
-            <Menu.Item key="5">CRUD</Menu.Item>
+            <Menu.Item key="5">选项5</Menu.Item>
             <Menu.Item key="6">选项6</Menu.Item>
             <Menu.Item key="7">选项7</Menu.Item>
             <Menu.Item key="8">选项8</Menu.Item>
@@ -113,7 +112,6 @@ export default React.createClass({
         </Menu>
       </aside>
       <div className="ant-layout-main">
-        <div className="ant-layout-header"></div>
         <div className="ant-layout-breadcrumb">
           <Breadcrumb>
             <Breadcrumb.Item>首页</Breadcrumb.Item>
@@ -123,7 +121,7 @@ export default React.createClass({
         </div>
         <div className="ant-layout-container">
           <div className="ant-layout-content">
-            <div style={{ height: 390 }} id='detail'>
+            <div id='detail'>
               内容区域
             </div>
           </div>

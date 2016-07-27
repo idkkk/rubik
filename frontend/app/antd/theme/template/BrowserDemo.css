@@ -96,7 +96,8 @@
 }
 
 .ant-layout-aside .ant-layout-breadcrumb {
-  margin: 7px 0 -17px 24px;
+  margin: 0px 0 -17px 24px;
+  padding: 7px;
 }
 
 .ant-layout-aside .ant-layout-main {
