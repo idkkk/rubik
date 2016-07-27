@@ -8,6 +8,19 @@ import Info from './components/info';
 import Edit from './components/edit';
 import {listcolumns,listdata} from './components/list';
 
+// product list
+import ProductList from './components/productlist/crud';
+
+
+// redux
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import TODO from './containers/TODO';
+import todoApp from './containers/reducers'
+
+//application
+
 const SubMenu = Menu.SubMenu;
 
 function hasLogin(){
@@ -27,6 +40,17 @@ export default React.createClass({
           break;
         case '2':
           ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+          break;
+        case '3':
+          let store = createStore(todoApp);
+
+          ReactDOM.render(<Provider store={store}>
+                            <TODO />
+                          </Provider>,
+                          document.getElementById('detail'))
+          break;
+        case '5':
+          ReactDOM.render(<ProductList />,document.getElementById('detail'))
           break;
         default:
           ReactDOM.render(<Info />,document.getElementById('detail'))
@@ -69,13 +93,13 @@ export default React.createClass({
         <div className="ant-layout-logo"></div>
         <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}  onSelect={this.onSelectTest}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
-            <Menu.Item key="1">选项1</Menu.Item>
-            <Menu.Item key="2">选项2</Menu.Item>
-            <Menu.Item key="3">选项3</Menu.Item>
+            <Menu.Item key="1">编辑页</Menu.Item>
+            <Menu.Item key="2">列表页</Menu.Item>
+            <Menu.Item key="3">TODO应用</Menu.Item>
             <Menu.Item key="4">选项4</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="laptop" />导航二</span>}>
-            <Menu.Item key="5">选项5</Menu.Item>
+            <Menu.Item key="5">CRUD</Menu.Item>
             <Menu.Item key="6">选项6</Menu.Item>
             <Menu.Item key="7">选项7</Menu.Item>
             <Menu.Item key="8">选项8</Menu.Item>
