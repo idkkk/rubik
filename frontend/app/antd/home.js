@@ -8,16 +8,22 @@ import Info from './components/info';
 import Edit from './components/edit';
 import {listcolumns,listdata} from './components/list';
 
-// product list
 import ProductList from './components/productlist/crud';
 
+// Product-List
+import ProductListPro from './product-list/containers/App';
+import productListReducer from './product-list/reducers'
+import api from './product-list/api/products'
+//import { getAllProducts } from './product-list/actions'
 
-// redux
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 
 import TODO from './containers/TODO';
-import todoApp from './containers/reducers'
+import todoApp from './containers/reducers';
+
+
+import { createStore, applyMiddleware,compose } from 'redux'
+import { Provider } from 'react-redux';
+
 
 //application
 
@@ -28,6 +34,7 @@ function hasLogin(){
    return localStorage.getItem('login') == 'true';
 }
 
+
 export default React.createClass({
   onSelectTest(item){
         console.log('select evnet >>>>>');
@@ -35,13 +42,20 @@ export default React.createClass({
         console.log(item.key == '1');
         switch(item.key)
         {
-        case '1':
-          ReactDOM.render(<Edit />,document.getElementById('detail'))
-          break;
         case '2':
-          ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+
+        const storeList = createStore(productListReducer, api.mockProducts())
+
+          // storeList.dispatch(getAllProducts())
+          ReactDOM.render(<Provider store={storeList}>
+                            <ProductListPro />
+                          </Provider>,
+                          document.getElementById('detail'))
           break;
         case '3':
+          ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+          break;
+        case '1':
           let store = createStore(todoApp);
 
           ReactDOM.render(<Provider store={store}>
@@ -92,9 +106,9 @@ export default React.createClass({
       <aside className="ant-layout-sider">
         <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}  onSelect={this.onSelectTest}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
-            <Menu.Item key="1">编辑页</Menu.Item>
-            <Menu.Item key="2">列表页</Menu.Item>
-            <Menu.Item key="3">TODO应用</Menu.Item>
+            <Menu.Item key="1">TODO应用</Menu.Item>
+            <Menu.Item key="2">商品列表页</Menu.Item>
+            <Menu.Item key="3">列表页</Menu.Item>
             <Menu.Item key="4">CRUD</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="laptop" />导航二</span>}>
