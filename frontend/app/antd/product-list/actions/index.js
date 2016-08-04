@@ -8,6 +8,9 @@ import products from '../api/products'
 
 import * as types from '../constants/ActionTypes'
 
+import fetch from 'isomorphic-fetch'
+
+
 
 /*
  * action 执行函数
