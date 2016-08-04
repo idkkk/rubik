@@ -11,8 +11,7 @@ import {listcolumns,listdata} from './components/list';
 import ProductList from './components/productlist/crud';
 
 // Product-List
-import ProductListPro , { createStore } from './product-list/containers/App';
-
+import Root , { createStore } from './product-list/containers/Root';
 
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
@@ -45,9 +44,7 @@ export default React.createClass({
         const productListProStore = createStore()
 
           // storeList.dispatch(getAllProducts())
-          ReactDOM.render(<Provider store={productListProStore}>
-                            <ProductListPro />
-                          </Provider>,
+          ReactDOM.render(<Root store={productListProStore} />,
                           document.getElementById('detail'))
           break;
         case '3':
