@@ -12,6 +12,8 @@ export default function productListReducer(state, action) {
   }
 }
 
+// simple use for default setting
+
 // export default combineReducers({
 //     searchSource,
 //     dataSource

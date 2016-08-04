@@ -11,18 +11,16 @@ import {listcolumns,listdata} from './components/list';
 import ProductList from './components/productlist/crud';
 
 // Product-List
-import ProductListPro from './product-list/containers/App';
-import productListReducer from './product-list/reducers'
-import api from './product-list/api/products'
-//import { getAllProducts } from './product-list/actions'
+import ProductListPro , { createStore } from './product-list/containers/App';
 
 
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
 
 
-import { createStore, applyMiddleware,compose } from 'redux'
 import { Provider } from 'react-redux';
+
+
 
 
 //application
@@ -44,10 +42,10 @@ export default React.createClass({
         {
         case '2':
 
-        const storeList = createStore(productListReducer, api.mockProducts())
+        const productListProStore = createStore()
 
           // storeList.dispatch(getAllProducts())
-          ReactDOM.render(<Provider store={storeList}>
+          ReactDOM.render(<Provider store={productListProStore}>
                             <ProductListPro />
                           </Provider>,
                           document.getElementById('detail'))

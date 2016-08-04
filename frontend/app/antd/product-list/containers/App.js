@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import SearchContainer from './SearchContainer'
 import ListContainer from './ListContainer'
 
+import configureStore from '../configureStore'
+
 export default class App extends Component {
   render() {
     return (
@@ -17,5 +19,8 @@ export default class App extends Component {
   }
 }
 
+export function createStore(){
+  return configureStore()
+}
 
 

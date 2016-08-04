@@ -28,7 +28,6 @@ function updateProduct(state = [],item){
 }
 
 function searchProduct(state = [],searchItem){
-  console.log('>>>>>>>>>>>>>',state,searchItem)
   var tmp = []
   if(searchItem.name == null && searchItem.desc == null){
     return tmp
@@ -38,7 +37,6 @@ function searchProduct(state = [],searchItem){
       tmp.push(item)
     }
     return item})
-  console.log('>>>>>>>>>>>>>',tmp,searchItem)
   return tmp
 }
 
