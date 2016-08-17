@@ -12,6 +12,7 @@ import ProductList from './components/productlist/crud';
 
 // Product-List
 import Root , { createStore } from './product-list/containers/Root';
+import { initItem } from './product-list/actions/index';
 
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
@@ -43,9 +44,11 @@ export default React.createClass({
 
         const productListProStore = createStore()
 
-          // storeList.dispatch(getAllProducts())
-          ReactDOM.render(<Root store={productListProStore} />,
+        productListProStore.dispatch(initItem())
+
+        ReactDOM.render(<Root store={productListProStore} />,
                           document.getElementById('detail'))
+
           break;
         case '3':
           ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))

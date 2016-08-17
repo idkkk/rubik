@@ -38,6 +38,10 @@ function receiveProducts(products) {
   }
 }
 
+export function initItem(){
+  return { type: types.INIT_ITEM}
+}
+
 export function addItem(item) {
   return { type: types.ADD_ITEM, item }
 }

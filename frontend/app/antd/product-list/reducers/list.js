@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes'
+import api from '../api/products';
 
 function addProduct(state = []){
   return [...state,{key: parseInt(Math.random()*100,10)+1,
@@ -40,6 +41,10 @@ function searchProduct(state = [],searchItem){
   return tmp
 }
 
+function initProduct(state = []){
+  return api.getProducts()
+}
+
 export default function dataSource(state = [], action,searchSource){
     switch (action.type) {
     case types.ADD_ITEM:
@@ -50,6 +55,8 @@ export default function dataSource(state = [], action,searchSource){
       return deleteProduct(state,action.item)
     case types.SEARCH_ITEM:
       return searchProduct(state,searchSource)
+    case types.INIT_ITEM:
+      return initProduct(state)
     default:
       return state
   }

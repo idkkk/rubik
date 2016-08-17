@@ -12,3 +12,5 @@ export const SEARCH_CLEAR_ITEM = 'SEARCH_CLEAR_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
+
+export const INIT_ITEM = 'INIT_ITEM';
