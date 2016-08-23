@@ -1,0 +1,9 @@
+server:
+  port: 9000
+
+logging:
+  file: hystrix-dashboard.log
+
+spring:
+  application:
+    name: hystrix-dashboard

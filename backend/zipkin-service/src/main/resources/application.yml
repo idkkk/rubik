@@ -1,0 +1,12 @@
+server:
+  port: 9411
+
+logging:
+  file: zipkin-service.log
+
+spring:
+  application:
+    name: zipkin-service
+  cloud:
+    config:
+      uri: http://configserver:8888
