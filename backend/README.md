@@ -17,10 +17,10 @@ Backend base microservice.
 2. docker-compose build
 3. docker-compose up -d
 4. access
-- service register/discovery: http://IP:8761
-- service gateway: http://IP:8080/SERVICE-ID/xxx
-- service monitor: http://IP:9411
+  - service register/discovery: http://IP:8761
+  - service gateway: http://IP:8080/SERVICE-ID/xxx
+  - service monitor: http://IP:9411
 
 ### Remark
-IP: docker-machine create host IP address
-SERVICE-ID: spring.application.name in project
+1. IP: docker-machine create host IP address
+2. SERVICE-ID: spring.application.name in project
