@@ -1,5 +1,9 @@
-# MicroService 
-Backend base microservice.
+# Rubik Backend
+Backend API base microservice.
+
+## Technology
+1. spring cloud
+2. docker
 
 ## Features
 1. service register
