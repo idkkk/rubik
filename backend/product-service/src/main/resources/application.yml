@@ -1,0 +1,25 @@
+server:
+  port: 9090
+
+logging:
+  file: product-service.log
+
+spring:
+  application:
+    name: product-service
+  cloud:
+    config:
+      uri: http://configserver:8888
+  zipkin:
+    base-url: http://zipkinserver:9411/
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+eureka:
+  instance:
+    hostname: productserver
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/

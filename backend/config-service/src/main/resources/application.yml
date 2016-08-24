@@ -1,0 +1,22 @@
+server:
+  port: 8888
+
+logging:
+  file: config-service.log
+
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/idkkk/config-repo
+
+eureka:
+  instance:
+    hostname: configserver
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/

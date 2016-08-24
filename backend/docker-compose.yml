@@ -1,0 +1,46 @@
+version: '2'
+services:
+  discovery:
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+
+  configserver:
+    build: ./config-service
+    ports:
+      - "8888:8888"
+    links:
+      - discovery
+
+  hystrixdashboard:
+    build: ./hystrix-dashboard
+    ports:
+      - "9000:9000"
+    links:
+      - discovery
+      - gatewayserver
+
+  zipkinserver:
+    build: ./zipkin-service
+    ports:
+      - "9411:9411"
+    links:
+      - discovery
+      - configserver
+
+  productserver:
+    build: ./product-service
+    links:
+      - discovery
+      - configserver
+      - zipkinserver
+
+  gatewayserver:
+    build: ./gateway-service
+    ports:
+      - "8080:8080"
+    links:
+      - discovery
+      - configserver
+      - zipkinserver
+      - productserver

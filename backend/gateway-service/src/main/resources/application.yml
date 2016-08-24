@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+logging:
+  file: gateway-service.log
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    config:
+      uri: http://configserver:8888
+  zipkin:
+    base-url: http://zipkinserver:9411/
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+
+eureka:
+  instance:
+    hostname: gatewayserver
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
