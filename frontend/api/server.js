@@ -9,13 +9,13 @@ server.connection({
     port: 8082 
 });
 
-function mockProducts(){
+function mockProducts_test(){
     const mockState = new Object()
     mockState.dataSource = []
     for (let i = 0; i < 5; i++) {
       mockState.dataSource.push({
         key: i,
-        name: `商品${i}`,
+        name: `api商品${i}`,
         num: `${i+Math.floor(Math.random()*10)}`,
         desc: `网店直供${i}号`,
       });
@@ -24,6 +24,18 @@ function mockProducts(){
     return mockState
   }
 
+function mockProducts(){
+    const mockState = []
+    for (let i = 0; i < 5; i++) {
+      mockState.push({
+        key: i,
+        name: `api商品${i}`,
+        num: `${i+Math.floor(Math.random()*10)}`,
+        desc: `网店直供${i}号`,
+      });
+    }
+    return mockState
+  }
 
 // Add the route
 server.route({

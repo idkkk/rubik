@@ -10,8 +10,6 @@ import * as types from '../constants/ActionTypes'
 
 import fetch from 'isomorphic-fetch'
 
-
-
 /*
  * action 执行函数
  */
@@ -39,7 +37,18 @@ function receiveProducts(products) {
 }
 
 export function initItem(){
-  return { type: types.INIT_ITEM}
+  let item = {}
+  // fetch(`http://www.baidu.com`
+  //   ,{ method: "GET",
+  //       mode: "no-cors",
+  //       headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded"
+  //       }})
+  fetch(`http://web.rubik.com/api`)
+      .then(response => response.json()
+      .then(data => { console.log(data)
+                      item = Object.assign({},data)}))
+  return { type: types.INIT_ITEM, item}
 }
 
 export function addItem(item) {
@@ -70,5 +79,49 @@ export function searchItem(item) {
 
 export function searchClearItem(item) {
   return { type: types.SEARCH_CLEAR_ITEM, item }
+}
+
+
+/*
+  Async Actions
+ */
+
+export function requestPosts(code) {
+  console.log("=======requestPosts========",code)
+  return {
+    type: types.REQUEST_POSTS,
+    code: code
+  }
+}
+
+
+export function receivePosts(code, json) {
+  console.log("=======receivePosts========",code,json)
+  return {
+    type: types.RECEIVE_POSTS,
+    posts: json,
+    code: code,
+    receivedAt: Date.now()
+  }
+}
+
+
+/*
+  thunk action creator
+  store.dispatch(fetchPosts('search'))
+*/
+
+
+export function fetchPosts(code) {
+
+  return function (dispatch) {
+    dispatch(requestPosts(code))
+
+    return fetch(`http://web.rubik.com/api`)
+      .then(response => response.json())
+      .then(json =>
+        dispatch(receivePosts(code, json))
+      )
+  }
 }
 

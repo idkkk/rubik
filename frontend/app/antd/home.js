@@ -12,7 +12,7 @@ import ProductList from './components/productlist/crud';
 
 // Product-List
 import Root , { createStore } from './product-list/containers/Root';
-import { initItem } from './product-list/actions/index';
+import { initItem, fetchPosts } from './product-list/actions/index';
 
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
@@ -44,7 +44,7 @@ export default React.createClass({
 
         const productListProStore = createStore()
 
-        productListProStore.dispatch(initItem())
+        productListProStore.dispatch(fetchPosts("init"))
 
         ReactDOM.render(<Root store={productListProStore} />,
                           document.getElementById('detail'))

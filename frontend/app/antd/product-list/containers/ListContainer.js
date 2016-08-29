@@ -71,7 +71,7 @@ class ListContainer extends Component {
     }];
     
     return (
-      <div><Table dataSource={dataSource} columns={columns}  pagination={pagination} onRowClick={(record) => (console.log('table row click! data is ',record))}/></div>
+      <div><Table dataSource={dataSource.items} columns={columns}  pagination={pagination} onRowClick={(record) => (console.log('table row click! data is ',record))}/></div>
     );
   }
 }

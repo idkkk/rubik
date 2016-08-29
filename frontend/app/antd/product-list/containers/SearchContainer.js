@@ -8,7 +8,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { Form, Input, Row, Col, Button, Table } from 'antd';
 
-import { addSearchItem, addItem, searchClearItem, searchItem } from '../actions/index';
+import { addSearchItem, addItem, searchClearItem, searchItem, fetchPosts } from '../actions/index';
 import { select } from '../reducers/index';
 
 const FormItem = Form.Item;
@@ -27,7 +27,9 @@ class SearchContainer extends Component {
 	}
 
     const searchClick = function(item){
- 		dispatch(searchItem(item))
+ 		//dispatch(searchItem(item))
+ 		dispatch(fetchPosts('search'))
+ 		
 	}
 
 	const addClick = function(item){

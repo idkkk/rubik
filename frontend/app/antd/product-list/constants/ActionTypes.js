@@ -13,4 +13,12 @@ export const DELETE_ITEM = 'DELETE_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 
+//default
 export const INIT_ITEM = 'INIT_ITEM';
+
+//http request
+export const REQUEST_POSTS = 'REQUEST_POSTS'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const POSTS_FAILURE = 'POSTS_FAILURE'
+
+
