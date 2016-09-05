@@ -14,6 +14,10 @@ import ProductList from './components/productlist/crud';
 import Root , { createStore } from './product-list/containers/Root';
 import { initItem, fetchPosts } from './product-list/actions/index';
 
+// TableList
+import TableListRoot from './tablelist/containers/Root'
+import TableListRootConfigureStore from './tablelist/store/configureStore'
+
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
 
@@ -51,7 +55,13 @@ export default React.createClass({
 
           break;
         case '3':
-          ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+          // ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
+
+          const tableListStore = TableListRootConfigureStore()
+          ReactDOM.render(<TableListRoot store={tableListStore} />,
+                          document.getElementById('detail'))
+
+
           break;
         case '1':
           let store = createStore(todoApp);
