@@ -1,0 +1,1 @@
+package org.rubik.common.util;import java.time.LocalDate;import java.time.ZoneId;import java.util.Date;/** * @author xiajinxin * @since 2016-08-04 */public abstract class DateUtils {    public static Date asDate(LocalDate localDate) {        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());    }}

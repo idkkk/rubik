@@ -1,7 +1,8 @@
 package org.rubik.common.controller;
 
 import com.google.common.base.Throwables;
-import org.rubik.common.response.BaseResponse;
+import org.rubik.common.response.ErrorResponse;
+import org.rubik.common.util.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,11 @@ public class BaseController {
     // ================================================= System Exception =================================================
     //TODO: 异常代码表
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<BaseResponse> handleExcetpion(Exception ex) {
+    public ResponseEntity<ErrorResponse> handleExcetpion(Exception ex) {
         LOGGER.error("Exception info: {}", Throwables.getStackTraceAsString(ex));
-        BaseResponse response = new BaseResponse();
-        response.setCode(BaseResponse.CODE_FAILURE);
-        response.setMessage(BaseResponse.MESSAGE_FAILURE);
+        ErrorResponse response = new ErrorResponse();
+        response.setCode(ErrorCode.SYSTEM_ERROR);
+        response.setMessage(ErrorCode.getMessage(ErrorCode.SYSTEM_ERROR));
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 }

@@ -1,1 +1,0 @@
-package org.rubik.product.util;import com.google.common.base.Throwables;/** * @author xiajinxin * @since 2016-08-04 */public abstract class ThreadUtils {    public static void pause(int mills) {        try {            Thread.sleep(mills);        } catch (InterruptedException e) {            Throwables.propagate(e);        }    }}
