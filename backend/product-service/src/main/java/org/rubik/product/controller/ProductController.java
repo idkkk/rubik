@@ -42,7 +42,7 @@ public class ProductController extends BaseController {
      * @param id product's Id.
      * @return the specific Product.
      */
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ResponseEntity<Product> findProduct(@PathVariable("id") Long id) {
         Product product = productRepository.findOne(id);
         return new ResponseEntity(product, HttpStatus.OK);
@@ -53,7 +53,7 @@ public class ProductController extends BaseController {
      * @param data Product.
      * @return Product.
      */
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    @RequestMapping(value = "/product", method = RequestMethod.POST)
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product data) {
         Product product = productRepository.save(data);
         return new ResponseEntity(product, HttpStatus.CREATED);
@@ -64,7 +64,7 @@ public class ProductController extends BaseController {
      * @param data Product.
      * @return Product.
      */
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product data) {
         Product prodcut = productRepository.save(data);
         return new ResponseEntity(prodcut, HttpStatus.OK);
@@ -74,7 +74,7 @@ public class ProductController extends BaseController {
      * Delete One Product.
      * @param id Product's Id.
      */
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") Long id) {
         productRepository.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
