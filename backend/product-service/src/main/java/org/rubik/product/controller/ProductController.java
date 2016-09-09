@@ -1,11 +1,13 @@
 package org.rubik.product.controller;
 
+import java.util.Objects;
 import javax.validation.Valid;
 import org.rubik.common.controller.BaseController;
 import org.rubik.product.domain.Product;
 import org.rubik.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,14 +30,20 @@ public class ProductController extends BaseController {
     private ProductRepository productRepository;
 
     /**
+     * //TODO: POST -> GET
      * GET All Products by Example.
      * @return Product Collection.
      */
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Product>> listProducts(@RequestBody Product data) {
-        Example<Product> example = Example.of(data);
-        Iterable<Product> result = productRepository.findAll(example);
-        return new ResponseEntity(result, HttpStatus.OK);
+    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    public ResponseEntity<Iterable<Product>> listProducts(@RequestBody(required = false) Product data) {
+        if (Objects.isNull(data)) {
+            Iterable<Product> result = productRepository.findAll();
+            return new ResponseEntity(result, HttpStatus.OK);
+        } else {
+            Example<Product> example = Example.of(data, ExampleMatcher.matching().withMatcher("name", matcher -> matcher.contains()));
+            Iterable<Product> result = productRepository.findAll(example);
+            return new ResponseEntity(result, HttpStatus.OK);
+        }
     }
 
     /**
