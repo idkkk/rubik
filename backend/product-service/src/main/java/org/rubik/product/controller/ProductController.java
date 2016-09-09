@@ -5,6 +5,7 @@ import org.rubik.common.controller.BaseController;
 import org.rubik.product.domain.Product;
 import org.rubik.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +28,13 @@ public class ProductController extends BaseController {
     private ProductRepository productRepository;
 
     /**
-     * GET All Products.
+     * GET All Products by Example.
      * @return Product Collection.
      */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Product>> listProducts() {
-        Iterable<Product> result = productRepository.findAll();
-
+    public ResponseEntity<Iterable<Product>> listProducts(@RequestBody Product data) {
+        Example<Product> example = Example.of(data);
+        Iterable<Product> result = productRepository.findAll(example);
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
