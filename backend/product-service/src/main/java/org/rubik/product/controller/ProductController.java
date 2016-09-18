@@ -3,8 +3,10 @@ package org.rubik.product.controller;
 import java.util.Objects;
 import javax.validation.Valid;
 import org.rubik.common.controller.BaseController;
+import org.rubik.common.util.ObjectUtils;
 import org.rubik.product.domain.Product;
 import org.rubik.product.repository.ProductRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -74,9 +76,16 @@ public class ProductController extends BaseController {
      * @return Product.
      */
     @RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product data) {
-        Product prodcut = productRepository.save(data);
-        return new ResponseEntity(prodcut, HttpStatus.OK);
+    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, @Valid @RequestBody Product data) {
+        Product product = productRepository.findOne(id);
+        if (product == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        // deep clone object && ignore null properties
+        BeanUtils.copyProperties(data, product, ObjectUtils.getNullPropertyNames(data));
+        productRepository.save(product);
+        return new ResponseEntity(product, HttpStatus.OK);
     }
 
     /**
