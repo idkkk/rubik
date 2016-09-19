@@ -1,7 +1,13 @@
 package org.rubik.product.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.validation.Valid;
+import org.hibernate.validator.constraints.NotBlank;
 import org.rubik.common.controller.BaseController;
 import org.rubik.common.util.ObjectUtils;
 import org.rubik.product.domain.Product;
@@ -42,7 +48,10 @@ public class ProductController extends BaseController {
             Iterable<Product> result = productRepository.findAll();
             return new ResponseEntity(result, HttpStatus.OK);
         } else {
-            Example<Product> example = Example.of(data, ExampleMatcher.matching().withMatcher("name", matcher -> matcher.contains()));
+            Example<Product> example = Example.of(data, ExampleMatcher.matching().withMatcher("name", matcher -> matcher.contains())
+                                                                                 .withMatcher("image", matcher -> matcher.contains())
+                                                                                 .withMatcher("manufacturer", matcher -> matcher.contains())
+                                                                                 .withMatcher("description", matcher -> matcher.contains()));
             Iterable<Product> result = productRepository.findAll(example);
             return new ResponseEntity(result, HttpStatus.OK);
         }
