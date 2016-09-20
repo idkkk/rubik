@@ -18,7 +18,7 @@ export function resetErrorMessage() {
   }
 }
 
-//定义数据fetch操作的action类型
+//数据fetch操作action类型
 
 export const RECORDS_REQUEST = 'RECORDS_REQUEST'
 
@@ -29,7 +29,18 @@ export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
 
 export const RECORDS_FAILURE = 'RECORDS_FAILURE'
 
+//布局操作action类型
+
+export const LAYOUT_TRANS = 'LAYOUT_TRANS'
+
+//布局类型
+
+export const LAYOUT_EDIT = 'LAYOUT_EDIT'
+export const LAYOUT_LIST = 'LAYOUT_LIST'
+
 //TODO:使用action creator和具体函数的工厂方法消除代码冗余
+
+//注：后端API交互需要把json对象转化为字符串
 
 //增加记录
 
@@ -37,14 +48,10 @@ function addRecordsFetchAction(record) {
   return {
     [CALL_API]: {
       types: [ RECORDS_REQUEST, ADD_SUCCESS, RECORDS_FAILURE ],
-      endpoint: `http://web.rubik.com/api/add/${record.key}`
+      endpoint: `product`,
+      method: "POST",
+      body: JSON.stringify(record)
     }
-  }
-}
-
-export function addRecords(record) {
-  return (dispatch, getState) => {
-    return dispatch(addRecordsFetchAction(record))
   }
 }
 
@@ -54,14 +61,16 @@ function deleteRecordsFetchAction(key) {
   return {
     [CALL_API]: {
       types: [ RECORDS_REQUEST, DELETE_SUCCESS, RECORDS_FAILURE ],
-      endpoint: `http://web.rubik.com/api/delete/${key}`
+      endpoint: `product/${key}`,
+      method: "DELETE",
+      body: key
     }
   }
 }
 
 export function deleteRecords(record) {
   return (dispatch, getState) => {
-    return dispatch(deleteRecordsFetchAction(record.key))
+    return dispatch(deleteRecordsFetchAction(record.id))
   }
 }
 
@@ -70,33 +79,33 @@ export function deleteRecords(record) {
 function updateRecordsFetchAction(record) {
   return {
     [CALL_API]: {
-      types: [ RECORDS_REQUEST, UPDATE_SUCCESS, RECORDS_FAILURE ],
-      endpoint: `http://web.rubik.com/api/update/${record.key}`
+      types: [ RECORDS_REQUEST, UPDATE_SUCCESS , RECORDS_FAILURE ],
+      endpoint: `product/${record.id}`,
+      method: "PUT",
+      body: JSON.stringify(record)
     }
-  }
-}
-
-export function updateRecords(record) {
-  return (dispatch, getState) => {
-    return dispatch(updateRecordsFetchAction(record))
   }
 }
 
 //查询记录
 
-function searchRecordsFetchAction(record = {name: "", desc: ""}) {
-  if(record.name != "" && record.desc != ""){
+function searchRecordsFetchAction(record = {name: "", description: ""}) {
+  if(record.name != "" || record.description != ""){
+    delete record["key"]
     return {
       [CALL_API]: {
         types: [ RECORDS_REQUEST, SEARCH_SUCCESS, RECORDS_FAILURE ],
-        endpoint: `http://web.rubik.com/api/search/${record.name}/${record.desc}`
+        endpoint: `products`,
+        method: "POST",
+        body: JSON.stringify(record)
       }
     }
   }
   return {
     [CALL_API]: {
       types: [ RECORDS_REQUEST, SEARCH_SUCCESS, RECORDS_FAILURE ],
-      endpoint: `http://web.rubik.com/api/all`
+      endpoint: `products`,
+      method: "POST"
     }
   }
 }
@@ -106,3 +115,52 @@ export function searchRecords(record) {
     return dispatch(searchRecordsFetchAction(record))
   }
 }
+
+//编辑记录
+
+export function submitRecords(record) {
+  //save
+  if(!record.id){
+    return (dispatch, getState) => {
+      return dispatch(addRecordsFetchAction(record))
+    }
+  }else{
+  //update
+    return (dispatch, getState) => {
+      return dispatch(updateRecordsFetchAction(record))
+    }
+  }
+}
+
+//布局行为
+
+function addRecordsAction(record) {
+  return {
+    type: LAYOUT_TRANS,
+    layout: LAYOUT_EDIT,
+    body: record
+  }
+}
+
+export function addRecords(record = {}) {
+  return (dispatch, getState) => {
+    return dispatch(addRecordsAction(record))
+  }
+
+}
+
+function updateRecordsAction(record) {
+  return {
+    type: LAYOUT_TRANS,
+    layout: LAYOUT_EDIT,
+    body: record
+  }
+}
+
+export function updateRecords(record) {
+  return (dispatch, getState) => {
+    return dispatch(updateRecordsAction(record))
+  }
+
+}
+

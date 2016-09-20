@@ -6,17 +6,38 @@
 
 import 'isomorphic-fetch'
 
-const API_ROOT = 'http://web.rubik.com/'
+// const API_ROOT = 'http://web.rubik.com/'
+const API_ROOT = 'http://localhost:9090/'
 
 // 统一处理fetch类操作，并规范数据格式
 
-function callApi(endpoint) {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+function fetchConfig(method,body) {
+  return { method: method,
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8"
+        },
+        body:body
+  }
+}
 
-  return fetch(fullUrl)
-    .then(response =>
-      response.json().then(json => ({ json, response }))
-    ).then(({ json, response }) => {
+//对DELETE操作不进行操作
+
+function callApi(endpoint,method,body) {
+  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+  return fetch(fullUrl, fetchConfig(method,body))
+    .then(response => {
+      let json = {}
+      if(method != "DELETE"){
+        json = response.json()
+      }else{
+        json = {key: body}
+      }
+      return { json, response }
+    })
+    // .then(response =>
+    //   response.json().then(json => ({ json, response })))
+    .then(({ json, response }) => {
       if (!response.ok) {
         return Promise.reject(json)
       }
@@ -25,6 +46,12 @@ function callApi(endpoint) {
       // return Object.assign({response: response},{result: json})
       return Object.assign(json)
     })
+
+    // .then(result => {
+    //   console.log("response : ",result,result.body)
+    //   return result.json()
+    // })
+    // .then(data => console.log("response data : ",data))
 }
 
 // 使用CALL_API来做actions的middleware，同时处理fetch类actions
@@ -36,7 +63,7 @@ export default store => next => action => {
   if (typeof callAPI === 'undefined') {
     return next(action)
   }
-  let { endpoint } = callAPI
+  let { endpoint, method, body } = callAPI
   const { types } = callAPI
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())
@@ -60,7 +87,7 @@ export default store => next => action => {
   const [ requestType, successType, failureType ] = types
   next(actionWith({ type: requestType }))
 
-  return callApi(endpoint).then(
+  return callApi(endpoint,method,body).then(
     response => next(actionWith({
       response,
       type: successType

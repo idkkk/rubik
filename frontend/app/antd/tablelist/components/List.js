@@ -46,13 +46,13 @@ export default class List extends Component {
 		          return <a href="#">{text}</a>;
         	},
       	}, {
-        	title: '数量',
-        	dataIndex: 'num',
-        	key: 'num',
+        	title: '价格',
+        	dataIndex: 'price',
+        	key: 'price',
   		}, {
         	title: '描述',
-        	dataIndex: 'desc',
-        	key: 'desc',
+        	dataIndex: 'description',
+        	key: 'description',
       	}, {
         	title: '操作',
         	key: 'operation',

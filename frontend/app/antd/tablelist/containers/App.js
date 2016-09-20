@@ -8,16 +8,20 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Search from '../components/Search'
 import List from '../components/List'
-import { resetErrorMessage, addRecords, deleteRecords, updateRecords, searchRecords } from '../actions'
+import Edit from '../components/Edit'
+import { resetErrorMessage, addRecords, deleteRecords, updateRecords, searchRecords, submitRecords, LAYOUT_EDIT, LAYOUT_LIST } from '../actions'
+
+import { Form } from 'antd';
 
 
 class App extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props)
     this.handleAdd = this.handleAdd.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDismissClick = this.handleDismissClick.bind(this)
   }
 
@@ -42,6 +46,10 @@ class App extends Component {
 
   handleSearch(record) {
     this.props.searchRecords(record)
+  }
+
+  handleSubmit(record) {
+    this.props.submitRecords(record) 
   }
 
   //初始化页面数据
@@ -69,15 +77,28 @@ class App extends Component {
 
   render() {
     //获取List需要的数据
-    const { records } = this.props
+    const { records, record, layout } = this.props
+
+    //定义布局
+    var layoutDetail
+    if(layout == LAYOUT_LIST){
+      layoutDetail = <div>
+                  <Search searchClick={this.handleSearch} addClick={this.handleAdd} />
+                  <List deleteClick={this.handleDelete} updateClick={this.handleUpdate} records={records} />
+              </div>
+    }else if(layout == LAYOUT_EDIT){
+      layoutDetail = <div>
+                  <Edit submitClick={this.handleSubmit} record={record} />
+               </div>
+    }else{
+      //TODO: 在外部定义异常显示状态
+      layoutDetail = <p>No Layout Detail</p>
+    }
+
     return (
       <div>
         <h2>Table List Template</h2>
-        <hr/>
-        <Search searchClick={this.handleSearch} addClick={this.handleAdd} />
-        <hr />
-        <List deleteClick={this.handleDelete} updateClick={this.handleUpdate} records={records} />
-        <hr />
+        {layoutDetail}
         {this.renderErrorMessage()}
       </div>
     )
@@ -90,18 +111,23 @@ App.propTypes = {
   errorMessage: PropTypes.string,
   //action触发
   records: PropTypes.array.isRequired,
+  record: PropTypes.object,
+  layout: PropTypes.string.isRequired,
   //自定义注入
   addRecords: PropTypes.func.isRequired,
   deleteRecords: PropTypes.func.isRequired,
   updateRecords: PropTypes.func.isRequired,
   searchRecords: PropTypes.func.isRequired,
+  submitRecords: PropTypes.func.isRequired,
   resetErrorMessage: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state, ownProps) {
   return {
     errorMessage: state.errorMessage,
-    records: state.records
+    records: state.records,
+    record: state.record,
+    layout: state.layout
   }
 }
 
@@ -111,5 +137,6 @@ export default connect(mapStateToProps, {
   addRecords,
   deleteRecords,
   updateRecords,
-  searchRecords
+  searchRecords,
+  submitRecords
 })(App)

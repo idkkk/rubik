@@ -23,35 +23,30 @@ function errorMessage(state = null, action) {
 //list的CRUD
 
 function addRecord(state = [],response){
-  return [ ...state,{key: response.key,
-                    name: `New商品999`,
-                    num: `999`,
-                    desc: `New网店直供999号`,}]
+  return [ ...state,response]
 }
 
-function deleteRecord(state = [],response){
+function deleteRecord(state = {},response){
   // 返回key不相等的数据组成的新array
   return array.remove(state, function(record) {
-    return record.key != response.key
+    return record.id != response.key
   })
 }
 
 
 function updateRecord(state = [],response){
-  let updateIndex = array.findIndex(state, function(record) { return record.key == response.key; });
+  let updateIndex = array.findIndex(state, function(record) { return record.id == response.id; });
   return [
         ...state.slice(0, updateIndex),
-        {key: parseInt(Math.random()*100,10)+1,
-          name: `商品999`,
-          num: `999`,
-          desc: `网店直供999号`,
-        },
+        response,
         ...state.slice(updateIndex + 1)]
 }
 
 function searchRecord(state = [],response){
-  return Object.assign([], state, response)
+  return Object.assign([], response)
 }
+
+// 处理API数据
 
 function records(state = [], action) {
   switch (action.type) {
@@ -68,8 +63,39 @@ function records(state = [], action) {
     }
 }
 
+//处理本地数据：编辑数据初始化
+
+function record(state = {}, action) {
+  switch (action.type) {
+    case ActionTypes.LAYOUT_TRANS:
+      return Object.assign({}, state, action.body)
+    case ActionTypes.ADD_SUCCESS:
+      return {}
+    case ActionTypes.UPDATE_SUCCESS:
+      return {}
+    default:
+      return state
+    }
+}
+
+//处理布局数据
+
+function layout(state = ActionTypes.LAYOUT_LIST, action) {
+    switch (action.type) {
+    case ActionTypes.LAYOUT_TRANS:
+      return action.layout
+    case ActionTypes.ADD_SUCCESS:
+      return ActionTypes.LAYOUT_LIST
+    case ActionTypes.UPDATE_SUCCESS:
+      return ActionTypes.LAYOUT_LIST
+    default:
+      return state
+    }
+}
 const rootReducer = combineReducers({
+  layout,
   records,
+  record,
   errorMessage
 })
 
