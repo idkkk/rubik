@@ -4,8 +4,10 @@
   "description": "the frontend of rubik",
   "main": "entry.js",
   "scripts": {
-    "build": "webpack ./app/antd/entry.js ./build/bundle.js",
-    "start": "webpack-dev-server --inline --content-base ./build/ --history-api-fallback"
+    "start": "npm run mock && npm run server",
+    "mock": "sh ./test/mock/products.sh",
+    "server": "webpack-dev-server --inline --content-base ./build/ --history-api-fallback",
+    "build": "webpack ./app/antd/entry.js ./build/bundle.js"
   },
   "repository": {
     "type": "git",
