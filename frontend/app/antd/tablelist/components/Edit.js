@@ -17,6 +17,7 @@ class Edit extends Component {
       super(props)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.handleReset = this.handleReset.bind(this)
+      this.handleReturn = this.handleReturn.bind(this)
     }
 
     handleSubmit(e) {
@@ -28,6 +29,11 @@ class Edit extends Component {
     handleReset(e) {
       e.preventDefault()
       this.props.form.resetFields()
+    }
+
+    handleReturn(e) {
+      e.preventDefault()
+      this.props.returnClick()
     }
 
     componentDidMount() {
@@ -61,6 +67,7 @@ class Edit extends Component {
             <Button type="primary" htmlType="submit">确定</Button>
             &nbsp;&nbsp;&nbsp;
             <Button type="ghost" onClick={this.handleReset}>重置</Button>
+            <Button type="ghost" onClick={this.handleReturn}>返回</Button>
           </FormItem>
         </Form>
     )

@@ -161,6 +161,20 @@ export function updateRecords(record) {
   return (dispatch, getState) => {
     return dispatch(updateRecordsAction(record))
   }
+}
 
+
+function transToListAction() {
+  return {
+    type: LAYOUT_TRANS,
+    layout: LAYOUT_LIST,
+    body: {}
+  }
+}
+
+export function transToList() {
+  return (dispatch, getState) => {
+    return dispatch(transToListAction())
+  }
 }
 

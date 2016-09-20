@@ -68,7 +68,7 @@ function records(state = [], action) {
 function record(state = {}, action) {
   switch (action.type) {
     case ActionTypes.LAYOUT_TRANS:
-      return Object.assign({}, state, action.body)
+      return Object.assign({}, action.body)
     case ActionTypes.ADD_SUCCESS:
       return {}
     case ActionTypes.UPDATE_SUCCESS:

@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import Search from '../components/Search'
 import List from '../components/List'
 import Edit from '../components/Edit'
-import { resetErrorMessage, addRecords, deleteRecords, updateRecords, searchRecords, submitRecords, LAYOUT_EDIT, LAYOUT_LIST } from '../actions'
+import { resetErrorMessage, addRecords, deleteRecords, updateRecords, searchRecords, submitRecords, transToList, LAYOUT_EDIT, LAYOUT_LIST } from '../actions'
 
 import { Form } from 'antd';
 
@@ -22,6 +22,7 @@ class App extends Component {
     this.handleUpdate = this.handleUpdate.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleReturn = this.handleReturn.bind(this)
     this.handleDismissClick = this.handleDismissClick.bind(this)
   }
 
@@ -50,6 +51,10 @@ class App extends Component {
 
   handleSubmit(record) {
     this.props.submitRecords(record) 
+  }
+
+  handleReturn(){
+    this.props.transToList() 
   }
 
   //初始化页面数据
@@ -88,7 +93,7 @@ class App extends Component {
               </div>
     }else if(layout == LAYOUT_EDIT){
       layoutDetail = <div>
-                  <Edit submitClick={this.handleSubmit} record={record} />
+                  <Edit submitClick={this.handleSubmit} returnClick={this.handleReturn} record={record} />
                </div>
     }else{
       //TODO: 在外部定义异常显示状态
@@ -119,6 +124,7 @@ App.propTypes = {
   updateRecords: PropTypes.func.isRequired,
   searchRecords: PropTypes.func.isRequired,
   submitRecords: PropTypes.func.isRequired,
+  transToList: PropTypes.func.isRequired,
   resetErrorMessage: PropTypes.func.isRequired
 }
 
@@ -138,5 +144,6 @@ export default connect(mapStateToProps, {
   deleteRecords,
   updateRecords,
   searchRecords,
-  submitRecords
+  submitRecords,
+  transToList
 })(App)
