@@ -12,21 +12,20 @@ npm install
 
 ## How to use
 
-1.run server
-	npm start
-2.build depoly files
-	npm build
+### run server
+
+npm start
+
+### build depoly files
+
+npm build
 
 ## access
 
-1. home
+http://localhost:8081/
 
-http://localhost:8080/
+http://localhost:8081/webpack-dev-server/
 
-2. hot load
+user:any
 
-http://localhost:8080/webpack-dev-server/bundle
-
-3. deploy
-
-http://localhost:8080/build/
+pwd:admin
