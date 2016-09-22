@@ -1,19 +1,22 @@
-import React, { Component, PropTypes } from 'react'
+/*
+  Name   : login logic
+  Author : zhangbaitong@163.com
+  Date   : 2016-09-22
+ */
 
+import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-// import antd
 import { Form, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
-// import rubik
+// 使用localstorage管理登录状态
 
 function hasLogin(){
-   console.log('log state now :',localStorage.getItem('login'));
    return localStorage.getItem('login') == 'true';
 }
 
-let Demo = React.createClass({
+let LoginCom = React.createClass({
   contextTypes: {
       router: React.PropTypes.object
   },
@@ -61,6 +64,6 @@ let Demo = React.createClass({
 });
 
 
-Demo = Form.create()(Demo);
+LoginCom = Form.create()(LoginCom);
 
-module.exports = Demo
+module.exports = LoginCom

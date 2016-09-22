@@ -1,39 +1,33 @@
+/*
+  Name   : Home container
+  Author : zhangbaitong@163.com
+  Date   : 2016-09-22
+ */
+
+//TODO: remove to container folder
+
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux';
 import { browserHistory, Link } from 'react-router'
+
 import { Menu, Breadcrumb, Table, Icon } from 'antd';
 
-
-import Info from './components/info';
-import Edit from './components/edit';
-import {listcolumns,listdata} from './components/list';
-
-// Product-List
-import Root , { createStore } from './product-list/containers/Root';
-import { initItem, fetchPosts } from './product-list/actions/index';
-
+// Template
+import Template from './components/template';
 // TableList
 import TableListRoot from './tablelist/containers/Root'
 import TableListRootConfigureStore from './tablelist/store/configureStore'
-
 // CardList
 import CardListRoot from './tablelist/containers/CardListRoot'
 
-import TODO from './containers/TODO';
-import todoApp from './containers/reducers';
-
-
-import { Provider } from 'react-redux';
-
-//application
-
 const SubMenu = Menu.SubMenu;
 
+// 登录状态过滤器
 function hasLogin(){
    console.log('log state now :',localStorage.getItem('login'));
    return localStorage.getItem('login') == 'true';
 }
-
 
 export default React.createClass({
   onSelectTest(item){
@@ -42,34 +36,22 @@ export default React.createClass({
         console.log(item.key == '1');
         switch(item.key)
         {
+        case '1':
+          ReactDOM.render(<Template />,document.getElementById('detail'))
+          break;
         case '2':
-
-        const productListProStore = createStore()
-
-        productListProStore.dispatch(fetchPosts("init"))
-
-        ReactDOM.render(<Root store={productListProStore} />,
-                          document.getElementById('detail'))
-
+          ReactDOM.render(<Template />,document.getElementById('detail'))
           break;
         case '3':
           const tableListStore = TableListRootConfigureStore()
           ReactDOM.render(<TableListRoot store={tableListStore} />,document.getElementById('detail'))
-          break;
-        case '1':
-          let store = createStore(todoApp);
-
-          ReactDOM.render(<Provider store={store}>
-                            <TODO />
-                          </Provider>,
-                          document.getElementById('detail'))
           break;
         case '4':
           const CardListRootStore = TableListRootConfigureStore()
           ReactDOM.render(<CardListRoot store={CardListRootStore}/>,document.getElementById('detail'))
           break;
         default:
-          ReactDOM.render(<Info />,document.getElementById('detail'))
+          ReactDOM.render(<Template />,document.getElementById('detail'))
         }
   },
   getInitialState() {
@@ -86,8 +68,6 @@ export default React.createClass({
   	const collapse = this.state.collapse;
   	const haslogin = localStorage.getItem('login');
     const userName = localStorage.getItem('userName');
-  	console.log(haslogin);
-  	console.log(userName);
 	if(!hasLogin()){
       browserHistory.push('/')
       //return <p>你已经登录系统！<Link to="/logout">点此退出</Link></p>;
@@ -108,10 +88,10 @@ export default React.createClass({
       <aside className="ant-layout-sider">
         <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}  onSelect={this.onSelectTest}>
           <SubMenu key="sub1" title={<span><Icon type="user" />导航一</span>}>
-            <Menu.Item key="1">TODO应用</Menu.Item>
-            <Menu.Item key="2">商品列表页</Menu.Item>
-            <Menu.Item key="3">列表页</Menu.Item>
-            <Menu.Item key="4">CRUD</Menu.Item>
+            <Menu.Item key="1">Template</Menu.Item>
+            <Menu.Item key="2">Template</Menu.Item>
+            <Menu.Item key="3">商品管理</Menu.Item>
+            <Menu.Item key="4">商品列表</Menu.Item>
           </SubMenu>
           <SubMenu key="sub2" title={<span><Icon type="laptop" />导航二</span>}>
             <Menu.Item key="5">选项5</Menu.Item>
