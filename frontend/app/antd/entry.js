@@ -22,8 +22,7 @@ import { Router, Route, hashHistory, browserHistory, IndexRoute } from 'react-ro
 
 //import component
 import Login from './containers/LoginPage';
-import Logout from './logout';
-import Home from './home';
+import LayoutPage from './containers/LayoutPage';
 import About from './components/About';
 
 
@@ -32,9 +31,8 @@ class App extends Component {
   render() {
     return <Router history={browserHistory}>
     		<Route path="/" component={Login}/>
-    		<Route path="/logout" component={Logout}/>
     		<Route path="/about" component={About}/>
-    		<Route path="/home" component={Home}/>
+    		<Route path="/home" component={LayoutPage}/>
   		</Router>
   }
 }
