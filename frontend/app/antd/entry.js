@@ -21,10 +21,10 @@ import ReactDOM from 'react-dom'
 import { Router, Route, hashHistory, browserHistory, IndexRoute } from 'react-router'
 
 //import component
-import Login from './login';
+import Login from './containers/LoginPage';
 import Logout from './logout';
 import Home from './home';
-import About from './about';
+import About from './components/About';
 
 
 // define the root component

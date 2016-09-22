@@ -16,10 +16,10 @@ import { Menu, Breadcrumb, Table, Icon } from 'antd';
 // Template
 import Template from './components/template';
 // TableList
-import TableListRoot from './tablelist/containers/Root'
-import TableListRootConfigureStore from './tablelist/store/configureStore'
+import TableListRoot from './containers/Root'
+import TableListRootConfigureStore from './store/configureStore'
 // CardList
-import CardListRoot from './tablelist/containers/CardListRoot'
+import CardListRoot from './containers/CardListRoot'
 
 const SubMenu = Menu.SubMenu;
 
@@ -31,9 +31,6 @@ function hasLogin(){
 
 export default React.createClass({
   onSelectTest(item){
-        console.log('select evnet >>>>>');
-        console.log(item.key);
-        console.log(item.key == '1');
         switch(item.key)
         {
         case '1':
@@ -108,6 +105,7 @@ export default React.createClass({
         </Menu>
       </aside>
       <div className="ant-layout-main">
+      
         <div className="ant-layout-breadcrumb">
           <Breadcrumb>
             <Breadcrumb.Item>首页</Breadcrumb.Item>
@@ -115,6 +113,8 @@ export default React.createClass({
             <Breadcrumb.Item>某应用</Breadcrumb.Item>
           </Breadcrumb>
         </div>
+
+
         <div className="ant-layout-container">
           <div className="ant-layout-content">
             <div id='detail'>
@@ -122,9 +122,13 @@ export default React.createClass({
             </div>
           </div>
         </div>
+
+
         <div className="ant-layout-footer">
         rubik © 2016
         </div>
+
+
       </div>
     </div>
     </div>)
