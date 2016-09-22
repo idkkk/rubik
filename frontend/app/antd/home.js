@@ -8,8 +8,6 @@ import Info from './components/info';
 import Edit from './components/edit';
 import {listcolumns,listdata} from './components/list';
 
-import ProductList from './components/productlist/crud';
-
 // Product-List
 import Root , { createStore } from './product-list/containers/Root';
 import { initItem, fetchPosts } from './product-list/actions/index';
@@ -18,14 +16,14 @@ import { initItem, fetchPosts } from './product-list/actions/index';
 import TableListRoot from './tablelist/containers/Root'
 import TableListRootConfigureStore from './tablelist/store/configureStore'
 
+// CardList
+import CardListRoot from './tablelist/containers/CardListRoot'
+
 import TODO from './containers/TODO';
 import todoApp from './containers/reducers';
 
 
 import { Provider } from 'react-redux';
-
-
-
 
 //application
 
@@ -55,13 +53,8 @@ export default React.createClass({
 
           break;
         case '3':
-          // ReactDOM.render(<Table columns={listcolumns} dataSource={listdata} />,document.getElementById('detail'))
-
           const tableListStore = TableListRootConfigureStore()
-          ReactDOM.render(<TableListRoot store={tableListStore} />,
-                          document.getElementById('detail'))
-
-
+          ReactDOM.render(<TableListRoot store={tableListStore} />,document.getElementById('detail'))
           break;
         case '1':
           let store = createStore(todoApp);
@@ -72,7 +65,8 @@ export default React.createClass({
                           document.getElementById('detail'))
           break;
         case '4':
-          ReactDOM.render(<ProductList />,document.getElementById('detail'))
+          const CardListRootStore = TableListRootConfigureStore()
+          ReactDOM.render(<CardListRoot store={CardListRootStore}/>,document.getElementById('detail'))
           break;
         default:
           ReactDOM.render(<Info />,document.getElementById('detail'))

@@ -42,6 +42,8 @@ export const LAYOUT_LIST = 'LAYOUT_LIST'
 
 //注：后端API交互需要把json对象转化为字符串
 
+// ********  数据行为  ********
+
 //增加记录
 
 function addRecordsFetchAction(record) {
@@ -132,7 +134,7 @@ export function submitRecords(record) {
   }
 }
 
-//布局行为
+// ********  布局行为  ********
 
 function addRecordsAction(record) {
   return {
