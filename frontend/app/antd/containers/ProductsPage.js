@@ -1,5 +1,5 @@
 /*
-  Name   : CardList Container
+  Name   : Products Page Container
   Author : zhangbaitong@163.com
   Date   : 2016-09-21
  */
@@ -10,7 +10,7 @@ import CardList from '../components/CardList'
 
 import { searchRecords } from '../actions'
 
-class CardListPage extends Component {
+class ProductsPage extends Component {
   constructor(props) {
     super(props)
   }
@@ -30,7 +30,7 @@ class CardListPage extends Component {
 
 }
 
-CardListPage.propTypes = {
+ProductsPage.propTypes = {
   searchRecords: PropTypes.func.isRequired
 }
 
@@ -44,4 +44,4 @@ function mapStateToProps(state, ownProps) {
 //应用属性映射并注入行为
 export default connect(mapStateToProps, {
 	searchRecords
-})(CardListPage)
+})(ProductsPage)

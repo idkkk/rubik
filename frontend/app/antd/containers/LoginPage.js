@@ -10,7 +10,9 @@ import Login from '../components/Login'
 
 import { searchRecords } from '../actions'
 
-const path = `/home`
+require("../theme/template/BrowserDemo.css");
+
+const path = `/admin/`
 
 export default class LoginPage extends Component {
   constructor(props) {

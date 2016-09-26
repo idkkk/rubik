@@ -7,6 +7,7 @@
 import * as ActionTypes from '../actions'
 import array from 'lodash/array'
 import { combineReducers } from 'redux'
+import { routerReducer as routing } from 'react-router-redux'
 
 // 根据失败的fetch错误来更新错误信息
 
@@ -96,7 +97,8 @@ const rootReducer = combineReducers({
   layout,
   records,
   record,
-  errorMessage
+  errorMessage,
+  routing
 })
 
 export default rootReducer
