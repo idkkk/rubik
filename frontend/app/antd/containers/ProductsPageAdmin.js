@@ -1,5 +1,5 @@
 /*
-  Name   : App Container
+  Name   : Products Page Container for admin
   Author : zhangbaitong@163.com
   Date   : 2016-08-31
  */
