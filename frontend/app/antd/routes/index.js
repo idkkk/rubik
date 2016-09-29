@@ -14,7 +14,7 @@ import configureStore from '../store/configureStore'
 //page style
 import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 
-require("../theme/template/BrowserDemo.css");
+import '../theme/template/BrowserDemo.css'
 
 //redux store
 const store = configureStore()
